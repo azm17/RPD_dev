@@ -4,7 +4,7 @@
 
 ## UIの例
 ### 条件
-- (T,R,P,S)=(1.5,1,0,-0.5)
+- <img src="https://latex.codecogs.com/gif.latex?(T,R,P,S)=(1.5,1,0,-0.5)">
 - <img src="https://latex.codecogs.com/gif.latex?w=1">　（割引因子を考慮しない）
 - <img src="https://latex.codecogs.com/gif.latex?%28%5Cepsilon%2C%5Cxi%29%3D%280%2C0%29">　（エラーなし）
 
