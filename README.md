@@ -11,7 +11,7 @@
 ## 操作方法
 ### スライダー
 - 計算方法の切り替え
- -(0)Detは本研究で見つけた行列式で計算する方法，(1)はHilbe et al.,2015,GBEで示された逆行列の形で計算する方法である
+ - (0)Detは本研究で見つけた行列式で計算する方法，(1)はHilbe et al.,2015,GBEで示された逆行列の形で計算する方法である
 - 割引因子<img src="https://latex.codecogs.com/gif.latex?w">，エラー率<img src="https://latex.codecogs.com/gif.latex?\epsilon,\xi">は，スライダーで変更できる
 - 戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1">の値もスライダーから変更できる．1,000分の1単位で値を変えることができる
 ### ボタン
