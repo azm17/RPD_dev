@@ -4,8 +4,9 @@
 - <img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1"> は自分（縦軸）の戦略
 - <img src="https://latex.codecogs.com/gif.latex?\epsilon,\xi">はそれぞれ一方のみがエラーする確率，両方エラーする確率
 - <img src="https://latex.codecogs.com/gif.latex?w">は割引因子　（w=1のときは割引なし）
-- 相手の戦略 <img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">はランダム
+- 相手（横軸）の戦略 <img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">はランダム
 
+自分の戦略を1つに決め相手の戦略を1,000
 ## 操作方法
 
 ## UIの例
