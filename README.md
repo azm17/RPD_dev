@@ -16,11 +16,11 @@
 - 戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1">の値もスライダーから変更できる．1,000分の1単位で値を変えることができる
 ### ボタン
 - Other Opponent
-相手の戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">の値を別のランダムな値に変更する．
+ - 相手の戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">の値を別のランダムな値に変更する．
 - TRPS 5310
-<img src="https://latex.codecogs.com/gif.latex?(T,R,P,S)=(1.5,1,0,-0.5)">から<img src="https://latex.codecogs.com/gif.latex?(T,R,P,S)=(5,3,1,0)">に変更する．
+ - <img src="https://latex.codecogs.com/gif.latex?(T,R,P,S)=(1.5,1,0,-0.5)">から<img src="https://latex.codecogs.com/gif.latex?(T,R,P,S)=(5,3,1,0)">に変更する．
 - Save Fig
-任意の場所に今表示している図をPNG形式で保存する．
+ - 任意の場所に今表示している図をPNG形式で保存する．
 - Quit
 ツールを終了する．
 
