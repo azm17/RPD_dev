@@ -13,7 +13,7 @@
 - 計算方法の切り替え
   - (0)Detは本研究で見つけた行列式で計算する方法，(1)はHilbe et al.,2015,GBEで示された逆行列の形で計算する方法である
 - 割引因子<img src="https://latex.codecogs.com/gif.latex?w">，エラー率<img src="https://latex.codecogs.com/gif.latex?\epsilon,\xi">は，スライダーで変更できる
-- 戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1">の値もスライダーから変更できる．1,000分の1単位で値を変えることができる
+- 戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1">の値もスライダーから変更できる．1,000分の1単位で値を変えることができる．
 ### ボタン
 - Other Opponent
   - 相手の戦略<img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">の値を別のランダムな値に変更する．
@@ -31,5 +31,6 @@
 - <img src="https://latex.codecogs.com/gif.latex?%28%5Cepsilon%2C%5Cxi%29%3D%280%2C0%29">　（エラーなし）
 - <img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(1,0,0,1),%20p_0=1"> （WSLS戦略）
 
-![wsls strategy](https://github.com/azm17/RPD/blob/master/wsls.PNG "wsls")
 ※相手がALLCのときは，定常分布がなく計算できないので，青点が表示されない．
+
+![wsls strategy](https://github.com/azm17/RPD/blob/master/wsls.PNG "wsls")
