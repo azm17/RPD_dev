@@ -6,7 +6,7 @@
 - <img src="https://latex.codecogs.com/gif.latex?w">は割引因子　（w=1のときは割引なし）
 - 相手（横軸）の戦略 <img src="https://latex.codecogs.com/gif.latex?{\bf%20q}">はランダム
 
-自分の戦略を1つに決め相手の戦略を1,000
+自分の戦略を1つに決め，ランダムに決めた相手の1,000(+ALLDとALLC)戦略について，それぞれゲームを行った時の利得関係を見ることができる．
 ## 操作方法
 
 ## UIの例
