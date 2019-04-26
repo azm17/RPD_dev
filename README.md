@@ -8,6 +8,6 @@
 - <img src="https://latex.codecogs.com/gif.latex?w=1">　（割引因子を考慮しない）
 - <img src="https://latex.codecogs.com/gif.latex?%28%5Cepsilon%2C%5Cxi%29%3D%280%2C0%29">　（エラーなし）
 - <img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(1,0,0,1),%20p_0=1"> （WSLS戦略）
-- <img src="https://latex.codecogs.com/gif.latex?\bf%20q"> （WSLS戦略）
+- <img src="https://latex.codecogs.com/gif.latex?\bf%20q">はランダム
 
 ![wsls strategy](https://github.com/azm17/RPD/blob/master/wsls.PNG "wsls")
