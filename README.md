@@ -1,5 +1,7 @@
 # GUI-RPD-Discounting-Observation Errorsの説明
 繰り返し囚人のジレンマゲームの戦略が，割引因子や観測エラーによってどのような影響を受けるのか，このツールを使うことによって，理解を深めることができる．
+## 語句説明
+-<img src="https://latex.codecogs.com/gif.latex?{\bf%20p}=(p_1,p_2,p_3,p_4),p_0=1">は自分（縦軸）の戦略
 ## 操作方法
 
 ## UIの例
