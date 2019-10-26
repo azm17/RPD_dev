@@ -32,7 +32,7 @@ def Calculation_Determinant(p,q_list,epsilon,xi,Sx,Sy,w):
         ly.append(sy)
     return lx,ly
 
-#Inverse Matrix, Hilbe et al.,2015,GBE
+#Inverse Matrix, Hilbe et al.,2015,GEB
 def Calculation_Inverse(p,q_list,epsilon,xi,Sx,Sy,w):
     lx,ly=[],[]
     tau= 1-2*epsilon-xi
@@ -113,9 +113,9 @@ def save_fig():
 def DrawCanvas(canvas, ax, colors = "gray"):
     ax.cla()
     
-    w=1-scale5.get()/100
-    epsilon=scale6.get()/1000
-    xi=scale7.get()/1000
+    w=round(1-scale5.get()/100,2)
+    epsilon=round(scale6.get()/1000,3)
+    xi=round(scale7.get()/1000,3)
     option=scale8.get()
     
     i=1000#stride
@@ -127,31 +127,41 @@ def DrawCanvas(canvas, ax, colors = "gray"):
     SE = S*(1-epsilon-xi)+R*(epsilon+xi)
     TE = T*(1-epsilon-xi)+P*(epsilon+xi)
     PE = P*(1-epsilon-xi)+T*(epsilon+xi)
-    plt.title(r"(T,R,P,S)=("+str(T)+","+str(R)+","+str(P)+","+str(S)+")\n"+r"$(w,\epsilon,\xi)=($"+str(w)+","+str(epsilon)+","+str(xi)+r"$)$",fontsize=25)
-    plt.ylabel("Payoff of ("+str(p[1])+","+str(p[2])+","+str(p[3])+","+str(p[4])+"),$p_0=$"+str(p[0]),fontsize=25)
-    plt.xlabel("Payoff of Opponent",fontsize=25)
-
-    plt.rcParams["font.size"] = 15
+    
+    plt.title(r"(T,R,P,S)=("+str(T)+","+str(R)+","+str(P)+","+str(S)+")\n"\
+              +r"$(w,\epsilon,\xi)=($"+str(w)+","+str(epsilon)+","+str(xi)+r"$)$",
+              fontsize=15)
+    
+    plt.ylabel("Payoff of ("+str(p[1])+","+str(p[2])+","+str(p[3])+","+str(p[4])+"),$p_0=$"+str(p[0]),fontsize=15)
+    plt.xlabel("Payoff of Opponent",fontsize=15)
+    
+    plt.grid()
     plt.xlim([S-0.2,T+0.2])
     plt.ylim([S-0.2,T+0.2])
-    plt.text(P-0.4, P-0.2, r'$(P,P)$')
-    plt.text(R+0.05, R, r'$(R,R)$')
-    plt.text(T-0.1, S-0.1, r'$(T,S)$')
-    plt.text(S-0.1, T+0.05, r'$(S,T)$')
+    if R==3:
+        xy_list=[[P-0.65,P-0.35],[R+0.1, R+0.1],[T-0.5, S+0.9],[S+1, T-0.5]]
+    else:
+        xy_list=[[P-0.35,P-0.15],[R+0.05, R+0.05],[T-0.5, S-0.105],[S+0.4, T-0.105]]
+    
+    plt.text(xy_list[0][0],xy_list[0][1], r'$(P,P)$',fontsize=15)
+    plt.text(xy_list[1][0],xy_list[1][1], r'$(R,R)$',fontsize=15)
+    plt.text(xy_list[2][0],xy_list[2][1], r'$(T,S)$',fontsize=15)
+    plt.text(xy_list[3][0],xy_list[3][1], r'$(S,T)$',fontsize=15)
     plt.plot([R,S,P,T,R],[R,T,P,S,R],'r',color="black",markersize=3,alpha=0.5)
     plt.plot([R,S,P,T,R],[R,T,P,S,R],'o',color="black",markersize=3)
     plt.plot([RE,SE,PE,TE,RE],[RE,TE,PE,SE,RE],'r',color="black",markersize=3,alpha=0.5)
     plt.plot([RE,SE,PE,TE,RE],[RE,TE,PE,SE,RE],'o',color="black",markersize=3)
     plt.plot([R,P],[R,P],'r',linestyle="dashed",color="black",markersize=3,alpha=0.5)
-
+    
     Sx,Sy = [RE,SE,TE,PE],[RE,TE,SE,PE]#expected stage payoff vector
     y,x = Select_Method_Calculation(p,q_list,epsilon,xi,Sx,Sy,w,option)
     
     x0,y0=Select_Method_Calculation(p,[[0,0,0,0,0]],epsilon,xi,Sx,Sy,w,option)
     x1,y1=Select_Method_Calculation(p,[[1,1,1,1,1]],epsilon,xi,Sx,Sy,w,option)
-    plt.plot(y,x,'go',markersize=4,alpha=0.8)
-    plt.plot(x0,y0,'ro',markersize=6,alpha=0.8)
-    plt.plot(x1,y1,'bo',markersize=6,alpha=0.8)
+    plt.plot(y,x,'go',markersize=3,alpha=0.8)
+    plt.plot(x0,y0,'ro',markersize=5,alpha=0.8)
+    plt.plot(x1,y1,'bo',markersize=5,alpha=0.8)
+    #plt.rcParams["font.size"] = 15
     
     canvas.draw()
 
@@ -159,12 +169,13 @@ if __name__ == "__main__":
     try:
         #generate GUI
         root = tkinter.Tk()
-        root.title("GUI- vs 1,000 Strategies Under Discounting and Observation Errors in RPD game")
+        root.geometry("660x500")
+        root.title("GUI- vs 1,000+2 Strategies Under Discounting and Observation Errors in RPD game")
 
         #generate graph
-        fig,ax1 = plt.subplots(figsize=(8,8))
+        fig,ax1 = plt.subplots(figsize=(6,6))
         fig.gca().set_aspect('equal', adjustable='box')
-
+        
         #generate Canvas
         Canvas = FigureCanvasTkAgg(fig, master=root)
         Canvas.get_tk_widget().grid(row=0, column=0, rowspan=1000)
