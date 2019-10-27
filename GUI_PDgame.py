@@ -12,10 +12,24 @@ from tkinter import filedialog
 def D(p,q,f,epsilon,xi,w):
     tau,mu,eta = 1-2*epsilon-xi,1-epsilon-xi,epsilon+xi
     
-    Matrix= [[w*(tau*p[1]*q[1]+epsilon*p[1]*q[2]+epsilon*p[2]*q[1]+xi*p[2]*q[2])-1+(1-w)*p[0]*q[0],w*(mu*p[1]+eta*p[2])-1+(1-w)*p[0],w*(mu*q[1]+eta*q[2])-1+(1-w)*q[0],f[0]],
-             [w*(epsilon*p[1]*q[3]+xi*p[1]*q[4]+tau*p[2]*q[3]+epsilon*p[2]*q[4])  +(1-w)*p[0]*q[0],w*(eta*p[1]+mu*p[2])-1+(1-w)*p[0],w*(mu*q[3]+eta*q[4])  +(1-w)*q[0],f[1]],  
-             [w*(epsilon*p[3]*q[1]+tau*p[3]*q[2]+xi*p[4]*q[1]+epsilon*p[4]*q[2])  +(1-w)*p[0]*q[0],w*(mu*p[3]+eta*p[4])  +(1-w)*p[0],w*(eta*q[1]+mu*q[2])-1+(1-w)*q[0],f[2]], 
-             [w*(xi*p[3]*q[3]+epsilon*p[3]*q[4]+epsilon*p[4]*q[3]+tau*p[4]*q[4])  +(1-w)*p[0]*q[0],w*(eta*p[3]+mu*p[4])  +(1-w)*p[0],w*(eta*q[3]+mu*q[4])  +(1-w)*q[0],f[3]]
+    Matrix= [[w*(tau*p[1]*q[1]+epsilon*p[1]*q[2]+epsilon*p[2]*q[1]+xi*p[2]*q[2])-1+(1-w)*p[0]*q[0],
+              w*(mu*p[1]+eta*p[2])-1+(1-w)*p[0],
+              w*(mu*q[1]+eta*q[2])-1+(1-w)*q[0],
+              f[0]],
+    
+             [w*(epsilon*p[1]*q[3]+xi*p[1]*q[4]+tau*p[2]*q[3]+epsilon*p[2]*q[4])+(1-w)*p[0]*q[0],
+              w*(eta*p[1]+mu*p[2])-1+(1-w)*p[0],
+              w*(mu*q[3]+eta*q[4])  +(1-w)*q[0],
+              f[1]],
+              
+             [w*(epsilon*p[3]*q[1]+tau*p[3]*q[2]+xi*p[4]*q[1]+epsilon*p[4]*q[2])+(1-w)*p[0]*q[0],
+              w*(mu*p[3]+eta*p[4])  +(1-w)*p[0],w*(eta*q[1]+mu*q[2])-1+(1-w)*q[0],
+              f[2]],
+              
+             [w*(xi*p[3]*q[3]+epsilon*p[3]*q[4]+epsilon*p[4]*q[3]+tau*p[4]*q[4])+(1-w)*p[0]*q[0],
+              w*(eta*p[3]+mu*p[4])+(1-w)*p[0],
+              w*(eta*q[3]+mu*q[4])+(1-w)*q[0],
+              f[3]]
             ]
     return LA.det(Matrix)
 
@@ -64,7 +78,9 @@ def Calculation_Inverse(p,q_list,epsilon,xi,Sx,Sy,w):
         IwM=np.eye(4)-w*M
         try:
             inverseIwM=np.linalg.inv(IwM)
-        except:
+        except Exception as error:
+            txt.delete(0, tkinter.END)
+            txt.insert(tkinter.END,error.__str__())
             print("It can not be executed on w=1")
         
         v0=np.array([[p[0]*q[0],p[0]*(1-q[0]),(1-p[0])*q[0],(1-p[0])*(1-q[0])]])
@@ -93,6 +109,8 @@ def Quit():
 def change_q(canvas, ax):
     global q_list
     q_list=[[random.random(),random.random(),random.random(),random.random(),random.random()] for i in range(1000)]
+    txt.delete(0, tkinter.END)
+    txt.insert(tkinter.END,"changed opponents")
     DrawCanvas(canvas, ax, colors = "gray")
 
 def change_5310(canvas, ax):
@@ -102,7 +120,7 @@ def change_5310(canvas, ax):
     else:
         T,R,P,S=5,3,1,0
     DrawCanvas(canvas, ax, colors = "gray")
-    
+
 def save_fig():
     filepath = filedialog.askdirectory(initialdir = dir)
     path=filepath+'\\fig.png'
@@ -110,13 +128,26 @@ def save_fig():
     print(path)
     plt.savefig(path)
 
+def change_way_cal(canvas, ax):
+    global option
+    if option==1:
+        option=0
+        txt.delete(0, tkinter.END)
+        txt.insert(tkinter.END,"The method of cluculation is DETERMINANT")
+    else:
+        option=1
+        txt.delete(0, tkinter.END)
+        txt.insert(tkinter.END,"The method of cluculation is INVERSE MATRIX")
+    
+    DrawCanvas(canvas, ax, colors = "gray")
+    
 def DrawCanvas(canvas, ax, colors = "gray"):
     ax.cla()
     
     w=round(1-scale5.get()/100,2)
     epsilon=round(scale6.get()/1000,3)
     xi=round(scale7.get()/1000,3)
-    option=scale8.get()
+    #option=scale8.get()
     
     i=1000#stride
     #p=(p0,p1,p2,p3,p4)
@@ -132,7 +163,7 @@ def DrawCanvas(canvas, ax, colors = "gray"):
               +r"$(w,\epsilon,\xi)=($"+str(w)+","+str(epsilon)+","+str(xi)+r"$)$",
               fontsize=15)
     
-    plt.ylabel("Payoff of ("+str(p[1])+","+str(p[2])+","+str(p[3])+","+str(p[4])+"),$p_0=$"+str(p[0]),fontsize=15)
+    plt.ylabel(f"Payoff of ({p[1]},{p[2]},{p[3]},{p[4]}),$p_0=${p[0]}",fontsize=15)
     plt.xlabel("Payoff of Opponent",fontsize=15)
     
     plt.grid()
@@ -171,7 +202,7 @@ if __name__ == "__main__":
         root = tkinter.Tk()
         root.geometry("660x500")
         root.title("GUI- vs 1,000+2 Strategies Under Discounting and Observation Errors in RPD game")
-
+        
         #generate graph
         fig,ax1 = plt.subplots(figsize=(6,6))
         fig.gca().set_aspect('equal', adjustable='box')
@@ -180,6 +211,7 @@ if __name__ == "__main__":
         Canvas = FigureCanvasTkAgg(fig, master=root)
         Canvas.get_tk_widget().grid(row=0, column=0, rowspan=1000)
         T,R,P,S=1.5,1,0,-0.5
+        option=0
         q_list=[[random.random(),random.random(),random.random(),random.random(),random.random()] for i in range(1000)]
         
         ReDrawButton = tkinter.Button(text="Other Opponent", width=15, command=partial(change_q, Canvas, ax1))
@@ -188,6 +220,8 @@ if __name__ == "__main__":
         TRPSButton.grid(row=15, column=1, columnspan=1)
         SaveButton = tkinter.Button(text="Save Fig", width=15, command=save_fig)
         SaveButton.grid(row=21, column=1, columnspan=1)
+        SaveButton = tkinter.Button(text="Method", width=15, command=partial(change_way_cal,Canvas, ax1))
+        SaveButton.grid(row=10, column=1, columnspan=1)
         
         scale0 = tkinter.Scale(root, label='p0', orient='h', from_=0, to=1000, command=partial(DrawCanvas, Canvas, ax1))
         scale0.grid(row=2, column=3, columnspan=1)
@@ -200,19 +234,26 @@ if __name__ == "__main__":
         scale4 = tkinter.Scale(root, label='p4',orient='h', from_=0, to=1000, command=partial(DrawCanvas, Canvas, ax1))
         scale4.grid(row=6, column=3, columnspan=1)
         
-        scale5 = tkinter.Scale(root, label='w',orient='h', from_=0, to=100, command=partial(DrawCanvas, Canvas, ax1))
-        scale5.grid(row=3, column=1, columnspan=1)
+        scale5 = tkinter.Scale(root, label='discount rate',orient='h', from_=0, to=100, command=partial(DrawCanvas, Canvas, ax1))
+        scale5.grid(row=2, column=1, columnspan=1)
         scale6 = tkinter.Scale(root, label='epsilon',orient='h', from_=0, to=300, command=partial(DrawCanvas, Canvas, ax1))
-        scale6.grid(row=4, column=1, columnspan=1)
+        scale6.grid(row=3, column=1, columnspan=1)
         scale7 = tkinter.Scale(root, label='xi', orient='h', from_=0, to=300, command=partial(DrawCanvas, Canvas, ax1))
-        scale7.grid(row=5, column=1, columnspan=1)
-        scale8 = tkinter.Scale(root, label='(0)Det (1)Inverse', orient='h', from_=0, to=1, command=partial(DrawCanvas, Canvas, ax1))
-        scale8.grid(row=2, column=1, columnspan=1)
+        scale7.grid(row=4, column=1, columnspan=1)
+        
         QuitButton = tkinter.Button(text="Quit", width=15, command=Quit)
         QuitButton.grid(row=30, column=1, columnspan=1)
         
+        lbl = tkinter.Label(text='Message:')
+        lbl.place(x=10, y=440)
+        txt = tkinter.Entry(width=50)
+        txt.place(x=10, y=460)
+        txt.insert(tkinter.END,"Welcome!")
+        
         DrawCanvas(Canvas,ax1)
         root.mainloop()
-    except:
-        import traceback
-        traceback.print_exc()
+    except Exception as error:
+        #import traceback
+        #traceback.print_exc()
+        txt.delete(0, tkinter.END)
+        txt.insert(tkinter.END,error.__str__())
